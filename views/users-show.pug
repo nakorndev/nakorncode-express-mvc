@@ -1,0 +1,28 @@
+extends layouts/default.pug
+
+block content
+  a(href="/users") Back to users
+  h1.title #{user.firstName} #{user.lastName}
+  if user.avatarUrl
+    img(src=user.avatarUrl alt=user.firstName)
+  .content
+    ul
+      li #[b ID:] #{user._id}
+      li #[b Age:] #{user.age}
+      li #[b Salary:] #{Number(user.salary).toLocaleString()}
+      li #[b Skills:] #{user.skills.join(', ')}
+      li #[b Termiated:] #{user.terminationDate || '-'}
+      li
+        b Department:
+        ul
+          li #[b ID:] #{user.department._id}
+          li
+            b Name:
+            |
+            |
+            a(href=`/departments/${user.department._id}`) #{user.department.name} (#{user.department.short})
+          li #[b Describe:] #{user.department.describe}
+      li
+        a(href=`/users/${user._id}/edit`) Edit this user
+      li
+        a(href=`/users/${user._id}?_method=DELETE` onclick="return confirm('Are you sure?')") Dismiss this employee

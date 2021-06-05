@@ -1,0 +1,11 @@
+extends layouts/default.pug
+
+block content
+  h1.title [#{department._id}] #{department.name} (#{department.short})
+  h2.subtitle #{department.describe}
+  .content
+    ul
+      li Count: #{department.users.length}
+      each user of department.users
+        li
+          a(href=`/users/${user._id}`) #{user.firstName} #{user.lastName} (#{user.age}) #{user.terminationDate}
